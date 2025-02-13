@@ -78,9 +78,10 @@ class ReportController extends Controller
             $year = date('Y', strtotime($currentPeriod));
 
             // 1. A/C In Fleet
-            $acInFleet = TblMasterac::where('Active', '1')
-                ->where('ACType', $aircraftType)
-                ->count();
+            $acInFleet = TblMonthlyfhfc::where('Actype', $aircraftType)
+                ->whereMonth('MonthEval', $month)
+                ->whereYear('MonthEval', $year)
+                ->count('Reg');
 
             // 2. A/C Days In Service
             $daysInService = TblMonthlyfhfc::where('Actype', $aircraftType)
@@ -276,9 +277,10 @@ class ReportController extends Controller
             $year = date('Y', strtotime($currentPeriod));
 
             // 1. A/C In Fleet
-            $acInFleet = TblMasterac::where('Active', '1')
-                ->where('ACType', $aircraftType)
-                ->count();
+            $acInFleet = TblMonthlyfhfc::where('Actype', $aircraftType)
+                ->whereMonth('MonthEval', $month)
+                ->whereYear('MonthEval', $year)
+                ->count('Reg');
 
             // 2. A/C Days In Service
             $daysInService = TblMonthlyfhfc::where('Actype', $aircraftType)
@@ -296,8 +298,9 @@ class ReportController extends Controller
             $flyingHoursTotal = TblMonthlyfhfc::where('Actype', $aircraftType)
                 ->whereMonth('MonthEval', $month)
                 ->whereYear('MonthEval', $year)
-                ->selectRaw('SUM(RevFHHours + (RevFHMin / 60) + NoRevFHHours + (NoRevFHMin / 60)) as total')
+                ->selectRaw('COALESCE(SUM(RevFHHours + (RevFHMin / 60) + NoRevFHHours + (NoRevFHMin / 60)), NULL) as total')
                 ->first()->total;
+
 
             // 4. Revenue Flying Hours
             $revenueFlyingHours = TblMonthlyfhfc::where('Actype', $aircraftType)

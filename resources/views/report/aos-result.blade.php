@@ -103,9 +103,9 @@
                                 $flyingHoursTotal = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['flyingHoursTotal'];
                                 $totalFlyingHoursTotal += $flyingHoursTotal;
                             @endphp
-                            <x-table.td>{{ round($flyingHoursTotal) }}</x-table.td>
+                            <x-table.td>{{ $flyingHoursTotal !== null ? round($flyingHoursTotal) : '' }}</x-table.td>
                         @endfor
-                        <x-table.td>{{ round($totalFlyingHoursTotal) }}</x-table.td>
+                        <x-table.td>{{ $totalFlyingHoursTotal !== null ? round($totalFlyingHoursTotal) : '' }}</x-table.td>
                     </tr>
                     <tr>
                         <x-table.th class="text-left">Revenue Flying Hours</x-table.th>
