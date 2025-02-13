@@ -152,7 +152,8 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
-  KEY `sessions_last_activity_index` (`last_activity`)
+  KEY `sessions_last_activity_index` (`last_activity`),
+  CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `tbl_alertlevel`;
@@ -231,7 +232,14 @@ DROP TABLE IF EXISTS `tbl_sdr`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_sdr` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `IDReg` int DEFAULT NULL,
+  `ACTYPE` varchar(50) DEFAULT NULL,
+  `Reg` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `DateOccur` date DEFAULT NULL,
+  `FlightNo` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `ATA` int DEFAULT NULL,
+  `Remark` varchar(50) DEFAULT NULL,
+  `Problem` varchar(50) DEFAULT NULL,
+  `Rectification` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
