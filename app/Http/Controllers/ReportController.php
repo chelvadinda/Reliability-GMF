@@ -298,8 +298,9 @@ class ReportController extends Controller
             $flyingHoursTotal = TblMonthlyfhfc::where('Actype', $aircraftType)
                 ->whereMonth('MonthEval', $month)
                 ->whereYear('MonthEval', $year)
-                ->selectRaw('SUM(RevFHHours + (RevFHMin / 60) + NoRevFHHours + (NoRevFHMin / 60)), as total')
+                ->selectRaw('SUM(RevFHHours + (RevFHMin / 60) + NoRevFHHours + (NoRevFHMin / 60)) as total')
                 ->first()->total;
+            
 
             // 4. Revenue Flying Hours
             $revenueFlyingHours = TblMonthlyfhfc::where('Actype', $aircraftType)

@@ -70,9 +70,9 @@
                                 $acInFleet = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['acInFleet'];
                                 $totalAcInFleet += $acInFleet;
                             @endphp
-                            <x-table.td>{{ $acInFleet }}</x-table.td>
+                            <x-table.td>{{ number_format ($acInFleet, decimals:2) }}</x-table.td>
                         @endfor
-                        <x-table.td>{{ $totalAcInFleet / 12 }}</x-table.td>
+                        <x-table.td>{{ number_format($totalAcInFleet / 12, decimals:2) }}</x-table.td>
                     </tr>
                     <tr>
                         <x-table.th class="text-left">A/C In Service</x-table.th>

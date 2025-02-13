@@ -79,9 +79,9 @@
                         $acInFleet = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['acInFleet'];
                             $totalAcInFleet += $acInFleet;
                         @endphp
-                        <td class="style1">{{ $acInFleet }}</td>
+                        <td class="style1">{{ number_format($acInFleet, decimals: 2) }}</td>
                     @endfor
-                    <td class="style1">{{ $totalAcInFleet / 12 }}</td>
+                    <td class="style1">{{ number_format($totalAcInFleet / 12, decimals: 2) }}</td>
                 </tr>
                 <tr>
                     <td>A/C in Service</td>
@@ -112,9 +112,9 @@
                             $flyingHoursTotal = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['flyingHoursTotal'];
                             $totalFlyingHoursTotal += $flyingHoursTotal;
                         @endphp
-                        <td class="style1">{{ round($flyingHoursTotal) }}</td>
+                        <td class="style1">{{ $flyingHoursTotal !== null ? round($flyingHoursTotal) : '' }}</td>
                     @endfor
-                    <td class="style1">{{ round($totalFlyingHoursTotal) }}</td>
+                    <td class="style1">{{ $totalFlyingHoursTotal !== null ? round($totalFlyingHoursTotal) : '' }}</td>
                 </tr>
                 <tr>
                     <td>Revenue Flying Hours</td>
