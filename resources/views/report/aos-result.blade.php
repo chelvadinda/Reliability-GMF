@@ -70,7 +70,7 @@
                                 $acInFleet = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['acInFleet'];
                                 $totalAcInFleet += $acInFleet;
                             @endphp
-                            <x-table.td>{{ number_format ($acInFleet, decimals:2) }}</x-table.td>
+                            <x-table.td>{{ round($acInFleet) }}</x-table.td>
                         @endfor
                         <x-table.td>{{ number_format($totalAcInFleet / 12, decimals:2) }}</x-table.td>
                     </tr>
@@ -81,7 +81,7 @@
                                 $acInService = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['acInService'];
                                 $totalAcInService += $acInService;
                             @endphp
-                            <x-table.td>{{ number_format($acInService, 2) }}</x-table.td>
+                            <x-table.td>{{ number_format($acInService, decimals:2) }}</x-table.td>
                         @endfor
                         <x-table.td>{{ number_format($totalAcInService / 12, 2) }}</x-table.td>
                     </tr>
@@ -103,9 +103,9 @@
                                 $flyingHoursTotal = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['flyingHoursTotal'];
                                 $totalFlyingHoursTotal += $flyingHoursTotal;
                             @endphp
-                            <x-table.td>{{ $flyingHoursTotal !== null ? round($flyingHoursTotal) : '' }}</x-table.td>
+                            <x-table.td>{{ round($flyingHoursTotal) }}</x-table.td>
                         @endfor
-                        <x-table.td>{{ $totalFlyingHoursTotal !== null ? round($totalFlyingHoursTotal) : '' }}</x-table.td>
+                        <x-table.td>{{ round($totalFlyingHoursTotal)}}</x-table.td>
                     </tr>
                     <tr>
                         <x-table.th class="text-left">Revenue Flying Hours</x-table.th>
@@ -125,7 +125,7 @@
                                 $takeOffTotal = $reportData[\Carbon\Carbon::parse($period)->subMonth($i)->format('Y-m')]['takeOffTotal'];
                                 $totalTakeOffTotal += $takeOffTotal;
                             @endphp
-                            <x-table.td>{{ $takeOffTotal }}</x-table.td>
+                            <x-table.td>{{ $takeOffTotal ?? 0 }}</x-table.td>
                         @endfor
                         <x-table.td>{{ round($totalTakeOffTotal) }}</x-table.td>
                     </tr>
